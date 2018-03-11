@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.7.2",
+  "package": "moe.clienthax.pixelmonbridge.impl.mixin.core",
+  "refmap": "mixins.forge.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "priority": 1111,
+  "mixins": [
+    "item.data.MixinPixelmonItem",
+    "item.data.MixinItemPixelmonSprite",
+    "tileentity.data.MixinTileEntityPC",
+    "player.data.MixinEntityPlayerMP",
+    "entity.MixinEntityPixelmon",
+    "entity.MixinEntity1Base",
+    "entity.MixinEntity3HasStats",
+    "api.MixinEnumPokemon"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

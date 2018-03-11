@@ -1,0 +1,96 @@
+buildscript {
+    repositories {
+        maven {
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven'
+        }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
+    }
+
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+		classpath 'org.spongepowered:spongegradle:0.8-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'org.spongepowered.plugin' version '0.8.1'
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'org.spongepowered.gradle'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+archivesBaseName = project.name.toLowerCase()
+version = "${project.minecraftVersion}-${project.forgeVersion}-r${project.apiVersion.split("-")[0]}"
+
+configurations {
+	mixins
+}
+
+sourceSets {
+    main {
+        refMap = "mixins.${project.name.toLowerCase()}.refmap.json"
+    }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        name = "Sponge"
+        url = "http://repo.spongepowered.org/maven"
+    }
+    maven {
+        name = "Forge"
+        url = "http://files.minecraftforge.net/maven"
+    }
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+
+dependencies {
+	compile 'org.spongepowered:spongeforge:1.12.2-2611-7.1.0-BETA-2931:dev'
+	compile 'org.spongepowered:mixin:0.7.6-SNAPSHOT'
+	compile files('libs/Pixelmon-1.12.2-6.2.1-universal-deobf.jar')
+	mixins 'org.spongepowered:spongeforge:1.12.2-2611-7.1.0-BETA-2931:dev'
+
+}
+
+minecraft {
+    forgeVersion = project.forgeVersion
+    runDir = 'run'
+    mappings = project.mcpMappings
+    makeObfSourceJar = false
+}
+
+mixin {
+    importConfig 'mixins'
+}
+
+jar {
+    classifier = "raw"
+    manifest {
+        attributes(
+                'Built-By': System.properties['user.name'],
+                'Created-By': System.properties['java.vm.version'] + ' (' + System.properties['java.vm.vendor'] + ')',
+                'Implementation-Title': project.name,
+                'Implementation-Version': version,
+                'Implementation-Vendor': url,
+                'FMLCorePlugin': 'moe.clienthax.pixelmonbridge.impl.PixelmonBridgeCoreMod',
+                'ForceLoadAsMod': 'true',
+                'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+                'TweakOrder': 0,
+        )
+    }
+}
+
+sponge.plugin.id = "pixelmonbridge"

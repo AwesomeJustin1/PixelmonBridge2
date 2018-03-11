@@ -1,0 +1,43 @@
+package moe.clienthax.pixelmonbridge.impl.mixin.core.api;
+
+import com.pixelmonmod.pixelmon.enums.EnumPokemon;
+import moe.clienthax.pixelmonbridge.api.entity.PixelmonType;
+import org.spongepowered.api.text.translation.Translation;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.common.SpongeImplHooks;
+import org.spongepowered.common.text.translation.SpongeTranslation;
+
+import javax.annotation.Nullable;
+import java.util.Locale;
+
+/**
+ * Created by clienthax on 10/03/2018.
+ */
+@Mixin(EnumPokemon.class)
+@Implements(@Interface(iface = PixelmonType.class, prefix = "pixelmontype$"))
+public abstract class MixinEnumPokemon {
+
+    @Nullable
+    private String spongeId;
+
+    @Shadow(remap = false)
+    public String name;
+
+    public String pixelmontype$getId() {
+        if (this.spongeId == null) {
+            final String gameTypeName = this.name.equals("") ? "not_set" : this.name.toLowerCase(Locale.ENGLISH);
+            this.spongeId = "pixelmon:" + gameTypeName;
+        }
+        return this.spongeId;
+    }
+
+    @Intrinsic
+    public String pixelmontype$getName() {
+        return name;
+    }
+
+    public Translation pixelmontype$getTranslation() {
+        return new SpongeTranslation("pixelmontype." + this.name.toLowerCase(Locale.ENGLISH));
+    }
+
+}

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.7.2",
+  "package": "moe.clienthax.pixelmonbridge.impl.mixin.core",
+  "refmap": "mixins.forge.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "priority": 1111,
+  "mixins": [
+    "sponge.MixinCommonModuleRegistry"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
