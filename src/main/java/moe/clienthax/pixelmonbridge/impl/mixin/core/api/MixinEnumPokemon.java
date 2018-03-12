@@ -1,7 +1,9 @@
 package moe.clienthax.pixelmonbridge.impl.mixin.core.api;
 
+import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
 import com.pixelmonmod.pixelmon.enums.EnumPokemon;
 import moe.clienthax.pixelmonbridge.api.entity.PixelmonType;
+import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.text.translation.Translation;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.common.SpongeImplHooks;
@@ -38,6 +40,10 @@ public abstract class MixinEnumPokemon {
 
     public Translation pixelmontype$getTranslation() {
         return new SpongeTranslation("pixelmontype." + this.name.toLowerCase(Locale.ENGLISH));
+    }
+
+    public Class<? extends Entity> pixelmontype$getEntityClass() {
+        return (Class<? extends org.spongepowered.api.entity.Entity>) (Object) EntityPixelmon.class;
     }
 
 }

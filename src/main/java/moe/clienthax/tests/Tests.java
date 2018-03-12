@@ -1,6 +1,8 @@
 package moe.clienthax.tests;
 
+import com.google.inject.Inject;
 import moe.clienthax.tests.commands.*;
+import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
@@ -14,8 +16,21 @@ import org.spongepowered.api.plugin.Plugin;
 @Plugin(id = "testsss", name="Tests", version = "1.0.0", description = "Tests yo", dependencies = {@Dependency(id = "pixelmonbridge")})
 public class Tests {
 
+    @Inject
+    private Logger logger;
+
+
+    static Tests instance;
+
+    public static Logger getLogger() {
+        return instance.logger;
+    }
+
     @Listener
     public void onServerStart(GameStartedServerEvent event) {
+
+        instance = this;
+
         CommandSpec testSpec = CommandSpec.builder()
                 .executor(new SpriteTestCommand())
                 .build();

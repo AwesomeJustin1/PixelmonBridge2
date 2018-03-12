@@ -59,6 +59,8 @@ public class BaseStatsDataProcessor extends AbstractEntityDataProcessor<EntityPi
 
     @Override
     public Optional<MutableBaseStatsData> fill(DataContainer container, MutableBaseStatsData mutableIVData) {
+        System.out.println("basestats->fill");
+
         return Optional.empty();
     }
 

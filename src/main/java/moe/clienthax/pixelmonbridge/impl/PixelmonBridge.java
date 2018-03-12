@@ -2,26 +2,32 @@ package moe.clienthax.pixelmonbridge.impl;
 
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableEVData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.item.ImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.tileentity.ImmutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableEVData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.tileentity.MutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableEVData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.player.PixelmonImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.item.PixelmonImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.tileentity.PixelmonImmutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableEVData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.player.PixelmonMutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.item.PixelmonMutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.tileentity.PixelmonMutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon.BaseStatsDataProcessor;
+import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon.EVDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.player.PartyPokemonProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.item.PixelmonSpriteItemDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.tileentity.ComputerTileEntityDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.basestats.*;
+import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.evs.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.item.SpritePathValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerColorValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerOwnerValueProcessor;
@@ -76,6 +82,17 @@ public class PixelmonBridge {
         DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_SP_ATTACK, new BaseStatsSPAttackValueProcessor());
         DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_SP_DEFENSE, new BaseStatsSPDefenseValueProcessor());
         DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_SPEED, new BaseStatsSpeedValueProcessor());
+
+        /**
+         * EV Data
+         */
+        DataUtil.registerDataProcessorAndImpl(MutableEVData.class, PixelmonMutableEVData.class, ImmutableEVData.class, PixelmonImmutableEVData.class, new EVDataProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_HP_EVS, new HPEVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_ATTACK_EVS, new AttackEVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_DEFENSE_EVS, new DefenseEVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SP_ATTACK_EVS, new SPAttackEVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SP_DEFENSE_EVS, new SPDefenseEVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SPEED_EVS, new SpeedEVSValueProcessor());
 
         /**
          * Player Data
