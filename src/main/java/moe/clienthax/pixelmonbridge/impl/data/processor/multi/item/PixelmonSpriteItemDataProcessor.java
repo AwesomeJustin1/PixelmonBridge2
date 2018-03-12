@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import com.pixelmonmod.pixelmon.storage.NbtKeys;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.item.ImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
+import moe.clienthax.pixelmonbridge.api.item.PixelmonItemTypes;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.item.PixelmonMutablePixelmonSpriteItemData;
-import moe.clienthax.pixelmonbridge.impl.items.PixelmonItemList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import org.spongepowered.api.data.DataContainer;
@@ -27,7 +27,7 @@ import static moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys.SPRITE_
 public class PixelmonSpriteItemDataProcessor extends AbstractItemDataProcessor<MutablePixelmonSpriteItemData, ImmutablePixelmonSpriteItemData> {
 
     public PixelmonSpriteItemDataProcessor() {
-        super(input -> input.getItem() == PixelmonItemList.SPRITE_ITEM);
+        super(input -> input.getItem() == PixelmonItemTypes.PIXELMON_SPRITE);
     }
 
     @Override

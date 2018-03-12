@@ -1,6 +1,6 @@
 package moe.clienthax.pixelmonbridge.impl.data.processor.value.item;
 
-import moe.clienthax.pixelmonbridge.impl.items.PixelmonItemList;
+import moe.clienthax.pixelmonbridge.api.item.PixelmonItemTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import org.spongepowered.api.data.DataTransactionResult;
@@ -32,7 +32,7 @@ public class SpritePathValueProcessor extends AbstractSpongeValueProcessor<ItemS
 
     @Override
     protected boolean set(ItemStack itemStack, String value) {
-        if (itemStack.getItem() == PixelmonItemList.SPRITE_ITEM) {
+        if (itemStack.getItem() == PixelmonItemTypes.PIXELMON_SPRITE) {
             NbtDataUtil.getOrCreateCompound(itemStack).setString("SpriteName", value);
         }
         return true;
@@ -40,7 +40,7 @@ public class SpritePathValueProcessor extends AbstractSpongeValueProcessor<ItemS
 
     @Override
     protected Optional<String> getVal(ItemStack itemStack) {
-        if (itemStack.getItem() == PixelmonItemList.SPRITE_ITEM) {
+        if (itemStack.getItem() == PixelmonItemTypes.PIXELMON_SPRITE) {
             final NBTTagCompound mainCompound = itemStack.getTagCompound();
             if (mainCompound == null) {
                 return Optional.empty(); // Basically, this wasn't initialized properly.

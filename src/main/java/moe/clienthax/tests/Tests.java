@@ -1,9 +1,6 @@
 package moe.clienthax.tests;
 
-import moe.clienthax.tests.commands.EntityTestCommand;
-import moe.clienthax.tests.commands.PCTestCommand;
-import moe.clienthax.tests.commands.PartyTestCommand;
-import moe.clienthax.tests.commands.SpriteTestCommand;
+import moe.clienthax.tests.commands.*;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.event.Listener;
@@ -39,6 +36,18 @@ public class Tests {
                 .executor(new EntityTestCommand())
                 .build();
         Sponge.getCommandManager().register(this, entityTestSpec, "entitytest");
+
+        CommandSpec itemTestSpec = CommandSpec.builder()
+                .executor(new ItemTestCommand())
+                .build();
+        Sponge.getCommandManager().register(this, itemTestSpec, "itemtest");
+
+        CommandSpec blockTestSpec = CommandSpec.builder()
+                .executor(new BlockTestCommand())
+                .build();
+        Sponge.getCommandManager().register(this, blockTestSpec, "blocktest");
+
+
     }
 
 }

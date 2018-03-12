@@ -30,6 +30,7 @@ public class PixelmonBridgeCoreMod implements IFMLLoadingPlugin {
 
         MixinBootstrap.init();
 
+        //TODO debug options
         MixinEnvironment.getDefaultEnvironment().setOption(MixinEnvironment.Option.DEBUG_EXPORT_DECOMPILE, true);
         MixinEnvironment.getDefaultEnvironment().setOption(MixinEnvironment.Option.DEBUG_EXPORT, true);
 
