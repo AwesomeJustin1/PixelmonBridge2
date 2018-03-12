@@ -7,22 +7,32 @@ import com.pixelmonmod.pixelmon.storage.PixelmonStorage;
 import com.pixelmonmod.pixelmon.storage.PlayerNotLoadedException;
 import com.pixelmonmod.pixelmon.storage.PlayerStorage;
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableEVData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableEVData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.player.PixelmonMutablePartyPokemonData;
+import moe.clienthax.tests.Tests;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import org.spongepowered.api.data.DataTransactionResult;
+import org.spongepowered.api.data.manipulator.DataManipulator;
 import org.spongepowered.api.data.value.ValueContainer;
 import org.spongepowered.api.data.value.immutable.ImmutableValue;
 import org.spongepowered.api.data.value.mutable.MapValue;
+import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntitySnapshot;
 import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.common.data.DataProcessor;
 import org.spongepowered.common.data.processor.common.AbstractSingleDataSingleTargetProcessor;
+import org.spongepowered.common.data.util.DataUtil;
 import org.spongepowered.common.data.value.immutable.ImmutableSpongeMapValue;
 import org.spongepowered.common.data.value.mutable.SpongeMapValue;
 import org.spongepowered.common.entity.SpongeEntitySnapshot;
+import org.spongepowered.common.interfaces.data.IMixinCustomDataHolder;
 
 import java.util.Map;
 import java.util.Optional;
@@ -59,7 +69,25 @@ public class PartyPokemonProcessor extends AbstractSingleDataSingleTargetProcess
                 if (partyNBTs[i] != null) {
                     EntityPixelmon pixelmon = (EntityPixelmon) PixelmonEntityList.createEntityFromNBT(partyNBTs[i], dataHolder.world);
                     pixelmon.setPosition(dataHolder.posX, dataHolder.posY, dataHolder.posZ);//TODO Workaround for entitysnapshot being a dick
-                    EntitySnapshot snapshot = ((Living) pixelmon).createSnapshot();
+
+                    //TODO manipulators get stripped out here :( (bodged fix)
+                    //Tests.getLogger().info("containers in party pokemon processor -> "+((Living) pixelmon).getContainers());
+
+                    //Bodge code
+                    EntitySnapshot.Builder snapshotbuilder = EntitySnapshot.builder()
+                            .from((Entity) pixelmon);
+                    //TODO nasty hack for entitysnapshot not saving manipulators
+                    //Tests.getLogger().info("Adding processors");
+                    for (DataManipulator<?, ?> dataManipulator : ((Entity) pixelmon).getContainers()) {
+                        final Optional<DataProcessor<?, ?>> dataprocessordel = DataUtil.getImmutableProcessor((Class) dataManipulator.getClass());//Returns DataProcessorDelegate
+                        //Tests.getLogger().info("Processor "+dataManipulator + " supports: "+dataprocessordel.get().supports(((Entity)pixelmon).getType()));
+                        snapshotbuilder = snapshotbuilder.add(dataManipulator);
+
+                    }
+                    EntitySnapshot snapshot = snapshotbuilder.build();
+
+                    //Tests.getLogger().info("containers in party pokemon processor snapshot -> "+snapshot.getContainers());
+
                     entitySnapshots.put(i, snapshot);
                 }
             }
