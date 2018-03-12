@@ -73,6 +73,14 @@ public class PixelmonDataKeys {
     public static final Key<Value<Integer>> POKEMON_SP_DEFENSE = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_sp_defense").name("Pokemon SP Defense").query(of("pokemonSpDefense")).build();
     public static final Key<Value<Integer>> POKEMON_SPEED = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_speed").name("Pokemon Speed").query(of("pokemonSpeed")).build();
 
+    public static final Key<Value<Integer>> POKEMON_BASESTATS_HP = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_hp").name("Pokemon BaseStats HP").query(of("pokemonBaseStatsHP")).build();
+    public static final Key<Value<Integer>> POKEMON_BASESTATS_ATTACK = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_attack").name("Pokemon BaseStats Attack").query(of("pokemonBaseStatsAttack")).build();
+    public static final Key<Value<Integer>> POKEMON_BASESTATS_DEFENSE = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_defense").name("Pokemon BaseStats Defense").query(of("pokemonBaseStatsDefense")).build();
+    public static final Key<Value<Integer>> POKEMON_BASESTATS_SP_ATTACK = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_sp_attack").name("Pokemon BaseStats SP Attack").query(of("pokemonBaseStatsSpAttack")).build();
+    public static final Key<Value<Integer>> POKEMON_BASESTATS_SP_DEFENSE = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_sp_defense").name("Pokemon BaseStats SP Defense").query(of("pokemonBaseStatsSpDefense")).build();
+    public static final Key<Value<Integer>> POKEMON_BASESTATS_SPEED = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_speed").name("Pokemon BaseStats Speed").query(of("pokemonBaseStatsSpeed")).build();
+
+
     public static final Key<Value<Integer>> POKEMON_LEVEL = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_level").name("Pokemon Level").query(of("pokemonLevel")).build();
     public static final Key<Value<Float>> POKEMON_SCALE = Key.builder().type(FLOAT_VALUE_TOKEN).id("pokemon_scale").name("Pokemon Scale").query(of("pokemonScale")).build();
     public static final Key<Value<String>> POKEMON_GROWTH = Key.builder().type(TypeTokens.STRING_VALUE_TOKEN).id("pokemon_growth").name("Pokemon Growth").query(of("pokemonGrowth")).build();

@@ -1,21 +1,27 @@
 package moe.clienthax.pixelmonbridge.impl;
 
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.item.ImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.tileentity.ImmutableComputerTileEntityData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.tileentity.MutableComputerTileEntityData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.player.PixelmonImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.item.PixelmonImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.tileentity.PixelmonImmutableComputerTileEntityData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.player.PixelmonMutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.item.PixelmonMutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.tileentity.PixelmonMutableComputerTileEntityData;
+import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon.BaseStatsDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.player.PartyPokemonProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.item.PixelmonSpriteItemDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.tileentity.ComputerTileEntityDataProcessor;
+import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.basestats.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.item.SpritePathValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerColorValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerOwnerValueProcessor;
@@ -59,6 +65,17 @@ public class PixelmonBridge {
         DataUtil.registerValueProcessor(PixelmonDataKeys.COMPUTER_OWNER, new ComputerOwnerValueProcessor());
         DataUtil.registerValueProcessor(PixelmonDataKeys.COMPUTER_COLOR, new ComputerColorValueProcessor());
         DataUtil.registerValueProcessor(PixelmonDataKeys.COMPUTER_RAVE_MODE, new ComputerRaveValueProcessor());
+
+        /**
+         * Base Stat Data
+         */
+        DataUtil.registerDataProcessorAndImpl(MutableBaseStatsData.class, PixelmonMutableBaseStatsData.class, ImmutableBaseStatsData.class, PixelmonImmutableBaseStatsData.class, new BaseStatsDataProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_HP, new BaseStatsHPValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_ATTACK, new BaseStatsAttackValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_DEFENSE, new BaseStatsDefenseValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_SP_ATTACK, new BaseStatsSPAttackValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_SP_DEFENSE, new BaseStatsSPDefenseValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_BASESTATS_SPEED, new BaseStatsSpeedValueProcessor());
 
         /**
          * Player Data

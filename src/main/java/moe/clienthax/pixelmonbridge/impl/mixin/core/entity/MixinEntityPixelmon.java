@@ -1,13 +1,20 @@
 package moe.clienthax.pixelmonbridge.impl.mixin.core.entity;
 
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.entity.PixelmonType;
+import org.spongepowered.api.data.manipulator.DataManipulator;
 import org.spongepowered.api.entity.EntityType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.common.SpongeImpl;
 import org.spongepowered.common.mixin.core.entity.MixinEntityLiving;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,6 +41,12 @@ public abstract class MixinEntityPixelmon extends MixinEntity3HasStats {
         }
 
         return super.getType();
+    }
+
+    @Override
+    public void supplyVanillaManipulators(List<DataManipulator<?, ?>> manipulators) {
+        super.supplyVanillaManipulators(manipulators);
+        get(MutableBaseStatsData.class).ifPresent(manipulators::add);
     }
 
 }

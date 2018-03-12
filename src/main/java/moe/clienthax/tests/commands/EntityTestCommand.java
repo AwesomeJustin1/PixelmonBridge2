@@ -1,5 +1,7 @@
 package moe.clienthax.tests.commands;
 
+import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.api.entity.PixelmonType;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
@@ -23,12 +25,20 @@ public class EntityTestCommand implements CommandExecutor {
 
         Player player = (Player) src;
 
+        System.out.println(player.getContainers());
+
         Collection<Entity> nearbyEntities = player.getNearbyEntities(50);
         for (Entity nearbyEntity : nearbyEntities) {
             if(!(nearbyEntity.getType() instanceof PixelmonType))
                 continue;
 
             System.out.println(nearbyEntity.getContainers());
+
+            System.out.println(nearbyEntity.get(PixelmonDataKeys.POKEMON_BASESTATS_HP).get());
+            MutableBaseStatsData mutableBaseStatsData = nearbyEntity.get(MutableBaseStatsData.class).get();
+            System.out.println(mutableBaseStatsData.attack().get());
+            System.out.println(mutableBaseStatsData.hp().get());
+
         }
 
 
