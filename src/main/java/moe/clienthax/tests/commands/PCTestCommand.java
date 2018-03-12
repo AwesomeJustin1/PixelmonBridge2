@@ -30,6 +30,8 @@ public class PCTestCommand implements CommandExecutor {
         if(pcloc.getTileEntity().isPresent()) {
             TileEntity tileEntity = pcloc.getTileEntity().get();
 
+            System.out.println(tileEntity.getContainers());
+
             Optional<UUID> uuid = tileEntity.get(PixelmonDataKeys.COMPUTER_OWNER).get();
             DyeColor dyeColor = tileEntity.get(PixelmonDataKeys.COMPUTER_COLOR).get();
             Boolean ravemode = tileEntity.get(PixelmonDataKeys.COMPUTER_RAVE_MODE).get();

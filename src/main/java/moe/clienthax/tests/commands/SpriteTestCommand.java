@@ -10,6 +10,8 @@ import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.ItemStack;
 
+import java.util.Optional;
+
 import static moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys.SPRITE_NAME;
 
 /**
@@ -24,13 +26,17 @@ public class SpriteTestCommand implements CommandExecutor {
 
         Player player = (Player) src;
 
-        //System.out.println(PixelmonItemTypes.RARECANDY);
-        //System.out.println(PixelmonItemTypes.SPRITE_ITEM);
-
-
+/*
         ItemStack spriteStack = ItemStack.of(PixelmonItemTypes.PIXELMON_SPRITE, 1);
         spriteStack.offer(SPRITE_NAME, "pixelmon:sprites/pokemon/150");
         player.setItemInHand(HandTypes.MAIN_HAND, spriteStack);
+
+        System.out.println(spriteStack.getContainers());
+        */
+
+        ItemStack itemInHand = player.getItemInHand(HandTypes.MAIN_HAND).get();
+        System.out.println(itemInHand.getContainers());
+
 
         return CommandResult.success();
     }

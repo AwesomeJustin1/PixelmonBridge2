@@ -38,7 +38,7 @@ public class ComputerTileEntityDataProcessor extends AbstractTileEntityDataProce
     protected boolean set(TileEntityPC dataHolder, Map<Key<?>, Object> keyValues) {
         Optional<UUID> owner = (Optional<UUID>) keyValues.get(PixelmonDataKeys.COMPUTER_OWNER);
         dataHolder.setOwner(owner.orElse(null));
-        dataHolder.setColour((String) keyValues.get(PixelmonDataKeys.COMPUTER_COLOR));
+        dataHolder.setColour(((DyeColor) keyValues.get(PixelmonDataKeys.COMPUTER_COLOR)).getId().toLowerCase());
         dataHolder.setRave((boolean) keyValues.get(PixelmonDataKeys.COMPUTER_RAVE_MODE));
         return true;
     }
@@ -47,7 +47,7 @@ public class ComputerTileEntityDataProcessor extends AbstractTileEntityDataProce
     protected Map<Key<?>, ?> getValues(TileEntityPC dataHolder) {
         ImmutableMap.Builder<Key<?>, Object> builder = ImmutableMap.builder();
         builder.put(PixelmonDataKeys.COMPUTER_OWNER, Optional.ofNullable(dataHolder.getOwnerUUID()));
-        builder.put(PixelmonDataKeys.COMPUTER_COLOR, dataHolder.getColour());
+        builder.put(PixelmonDataKeys.COMPUTER_COLOR, (DyeColor) (Object) EnumDyeColor.valueOf(dataHolder.getColour().toUpperCase()));
         builder.put(PixelmonDataKeys.COMPUTER_RAVE_MODE, dataHolder.getRave());
         return builder.build();
     }
@@ -66,7 +66,7 @@ public class ComputerTileEntityDataProcessor extends AbstractTileEntityDataProce
             ownerUUID = Optional.of(UUID.fromString(ownerMaybe.get()));
         }
         String colorName = container.getString(DataQuery.of("UnsafeData", NbtKeys.PC_COLOUR)).get();
-        DyeColor dyeColor = (DyeColor) (Object) EnumDyeColor.valueOf(colorName);
+        DyeColor dyeColor = (DyeColor) (Object) EnumDyeColor.valueOf(colorName.toUpperCase());
 
         Boolean raveMode = container.getBoolean(DataQuery.of("UnsafeData", NbtKeys.PC_RAVE)).get();
 
