@@ -9,7 +9,9 @@ import org.spongepowered.api.registry.util.DelayedRegistration;
 import org.spongepowered.api.registry.util.RegisterCatalog;
 import org.spongepowered.common.registry.type.MinecraftEnumBasedCatalogTypeModule;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by clienthax on 10/03/2018.
@@ -26,6 +28,19 @@ public class PixelmonTypeRegistryModule extends MinecraftEnumBasedCatalogTypeMod
                 this.catalogTypeMap.put(enumAs(enumPokemon).getId().toLowerCase(Locale.ENGLISH), (PixelmonType) (Object) enumPokemon);
             }
         }
+    }
+
+    /**
+     * Needed to make the fields in PixelmonTypes.class Hook up correctly
+     * @return
+     */
+    @Override
+    public Map<String, PixelmonType> provideCatalogMap() {
+        final HashMap<String, PixelmonType> map = new HashMap<>();
+        for (Map.Entry<String, PixelmonType> entry : this.catalogTypeMap.entrySet()) {
+            map.put(entry.getKey().replace("minecraft:", "").replace("pixelmon:", ""), entry.getValue());
+        }
+        return map;
     }
 
     @Override
