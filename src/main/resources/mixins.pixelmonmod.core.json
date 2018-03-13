@@ -14,7 +14,8 @@
     "entity.MixinEntityPixelmon",
     "entity.MixinEntity1Base",
     "entity.MixinEntity3HasStats",
-    "api.MixinEnumPokemon"
+    "api.MixinEnumPokemon",
+    "api.MixinEnumType"
   ],
   "injectors": {
     "defaultRequire": 1

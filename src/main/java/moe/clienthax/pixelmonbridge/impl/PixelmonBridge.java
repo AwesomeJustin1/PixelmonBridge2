@@ -55,12 +55,11 @@ public class PixelmonBridge {
 
     private void registerData() {
 
-        DataUtil.registerDataProcessorAndImpl(MutablePixelmonSpriteItemData.class, PixelmonMutablePixelmonSpriteItemData.class,
-                ImmutablePixelmonSpriteItemData.class, PixelmonImmutablePixelmonSpriteItemData.class,
-                new PixelmonSpriteItemDataProcessor()
-        );
-
-        DataUtil.registerValueProcessor(SPRITE_NAME, new SpritePathValueProcessor());
+        /**
+         * Item data
+         */
+        DataUtil.registerDataProcessorAndImpl(MutablePixelmonSpriteItemData.class, PixelmonMutablePixelmonSpriteItemData.class, ImmutablePixelmonSpriteItemData.class, PixelmonImmutablePixelmonSpriteItemData.class, new PixelmonSpriteItemDataProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.SPRITE_NAME, new SpritePathValueProcessor());
 
 
         /**

@@ -1,6 +1,8 @@
 package moe.clienthax.pixelmonbridge.impl.mixin.core.sponge;
 
+import moe.clienthax.pixelmonbridge.api.entity.PixelmonEnumType;
 import moe.clienthax.pixelmonbridge.api.entity.PixelmonType;
+import moe.clienthax.pixelmonbridge.impl.entity.PixelmonEnumTypeRegistryModule;
 import moe.clienthax.pixelmonbridge.impl.entity.PixelmonTypeRegistryModule;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,6 +22,7 @@ public abstract class MixinCommonModuleRegistry {
     private void onRegister(CallbackInfo callbackInfo) {
         SpongeGameRegistry registry = SpongeImpl.getRegistry();
         registry.registerModule(PixelmonType.class, new PixelmonTypeRegistryModule());
+        registry.registerModule(PixelmonEnumType.class, new PixelmonEnumTypeRegistryModule());
     }
 
 
