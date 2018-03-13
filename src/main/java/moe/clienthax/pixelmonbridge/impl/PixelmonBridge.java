@@ -4,24 +4,28 @@ import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableEVData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableEggData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableNameData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.item.ImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.tileentity.ImmutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableEVData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableEggData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableNameData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.tileentity.MutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableEVData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableEggData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableNameData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.player.PixelmonImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.item.PixelmonImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.tileentity.PixelmonImmutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableEVData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableEggData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableNameData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.player.PixelmonMutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.item.PixelmonMutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.tileentity.PixelmonMutableComputerTileEntityData;
@@ -31,6 +35,7 @@ import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.player.Part
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.item.PixelmonSpriteItemDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.tileentity.ComputerTileEntityDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.EggDataProcessor;
+import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.NameDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.basestats.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.evs.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.item.SpritePathValueProcessor;
@@ -103,6 +108,7 @@ public class PixelmonBridge {
          * Misc pokemon data
          */
         DataUtil.registerDualProcessor(MutableEggData.class, PixelmonMutableEggData.class, ImmutableEggData.class, PixelmonImmutableEggData.class, new EggDataProcessor());
+        DataUtil.registerDualProcessor(MutableNameData.class, PixelmonMutableNameData.class, ImmutableNameData.class, PixelmonImmutableNameData.class, new NameDataProcessor());
 
         /**
          * Player Data

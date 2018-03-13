@@ -19,7 +19,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import org.spongepowered.api.data.DataTransactionResult;
+import org.spongepowered.api.data.key.Key;
 import org.spongepowered.api.data.manipulator.DataManipulator;
+import org.spongepowered.api.data.value.BaseValue;
 import org.spongepowered.api.data.value.ValueContainer;
 import org.spongepowered.api.data.value.immutable.ImmutableValue;
 import org.spongepowered.api.data.value.mutable.MapValue;
@@ -76,13 +78,16 @@ public class PartyPokemonProcessor extends AbstractSingleDataSingleTargetProcess
                     //Bodge code
                     EntitySnapshot.Builder snapshotbuilder = EntitySnapshot.builder()
                             .from((Entity) pixelmon);
-                    //TODO nasty hack for entitysnapshot not saving manipulators
+                    //TODO nasty hack for entitysnapshot not saving manipulators / keys
+                    //TODO why the hell doesnt eggdata/namedata show up in here!!??
                     //Tests.getLogger().info("Adding processors");
                     for (DataManipulator<?, ?> dataManipulator : ((Entity) pixelmon).getContainers()) {
                         final Optional<DataProcessor<?, ?>> dataprocessordel = DataUtil.getImmutableProcessor((Class) dataManipulator.getClass());//Returns DataProcessorDelegate
-                        //Tests.getLogger().info("Processor "+dataManipulator + " supports: "+dataprocessordel.get().supports(((Entity)pixelmon).getType()));
+                        Tests.getLogger().info("Processor "+dataManipulator + " supports: "+dataprocessordel.get().supports(((Entity)pixelmon).getType())+" "+dataprocessordel.get().getClass());
                         snapshotbuilder = snapshotbuilder.add(dataManipulator);
-
+                    }
+                    for (Key key1 : ((Entity) pixelmon).getKeys()) {
+                        snapshotbuilder = snapshotbuilder.add(key1, ((Entity)pixelmon).get(key1).get());
                     }
                     EntitySnapshot snapshot = snapshotbuilder.build();
 
