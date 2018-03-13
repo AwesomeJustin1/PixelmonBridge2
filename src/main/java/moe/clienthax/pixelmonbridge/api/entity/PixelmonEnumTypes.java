@@ -6,7 +6,7 @@ import org.spongepowered.api.util.generator.dummy.DummyObjectProvider;
  * Created by clienthax on 13/03/2018.
  */
 public class PixelmonEnumTypes {
-    
+
     public static PixelmonEnumType NORMAL = DummyObjectProvider.createFor(PixelmonEnumType.class, "NORMAL");
     public static PixelmonEnumType FIRE = DummyObjectProvider.createFor(PixelmonEnumType.class, "FIRE");
     public static PixelmonEnumType WATER = DummyObjectProvider.createFor(PixelmonEnumType.class, "WATER");

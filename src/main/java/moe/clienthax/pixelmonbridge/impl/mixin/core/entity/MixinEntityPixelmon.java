@@ -51,6 +51,7 @@ public abstract class MixinEntityPixelmon extends MixinEntity3HasStats {
         get(MutableEggData.class).ifPresent(manipulators::add);
         get(MutableNameData.class).ifPresent(manipulators::add);
         get(MutableIVData.class).ifPresent(manipulators::add);
+        get(MutableNickNameData.class).ifPresent(manipulators::add);
     }
 
 }

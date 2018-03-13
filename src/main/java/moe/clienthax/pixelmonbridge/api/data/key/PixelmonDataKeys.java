@@ -81,6 +81,7 @@ public class PixelmonDataKeys {
     public static final Key<Value<Integer>> POKEMON_BASESTATS_SPEED = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_basestats_speed").name("Pokemon BaseStats Speed").query(of("pokemonBaseStatsSpeed")).build();
 
 
+    public static final Key<Value<Boolean>> POKEMON_LEVELING_ENABLED = Key.builder().type(TypeTokens.BOOLEAN_VALUE_TOKEN).id("pokemon_leveling_enabled").name("Pokemon Leveling Enabled").query(of("pokemonLevelingEnabled")).build();
     public static final Key<Value<Integer>> POKEMON_LEVEL = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_level").name("Pokemon Level").query(of("pokemonLevel")).build();
     public static final Key<Value<Float>> POKEMON_SCALE = Key.builder().type(FLOAT_VALUE_TOKEN).id("pokemon_scale").name("Pokemon Scale").query(of("pokemonScale")).build();
     public static final Key<Value<String>> POKEMON_GROWTH = Key.builder().type(TypeTokens.STRING_VALUE_TOKEN).id("pokemon_growth").name("Pokemon Growth").query(of("pokemonGrowth")).build();

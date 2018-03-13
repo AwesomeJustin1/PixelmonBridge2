@@ -25,6 +25,7 @@ import moe.clienthax.pixelmonbridge.impl.data.processor.multi.item.PixelmonSprit
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.tileentity.ComputerTileEntityDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.EggDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.NameDataProcessor;
+import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.NickNameDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.basestats.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.evs.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.ivs.*;
@@ -109,6 +110,7 @@ public class PixelmonBridge {
          */
         DataUtil.registerDualProcessor(MutableEggData.class, PixelmonMutableEggData.class, ImmutableEggData.class, PixelmonImmutableEggData.class, new EggDataProcessor());
         DataUtil.registerDualProcessor(MutableNameData.class, PixelmonMutableNameData.class, ImmutableNameData.class, PixelmonImmutableNameData.class, new NameDataProcessor());
+        DataUtil.registerDualProcessor(MutableNickNameData.class, PixelmonMutableNickNameData.class, ImmutableNickNameData.class, PixelmonImmutableNickNameData.class, new NickNameDataProcessor());
 
         /**
          * Player Data
