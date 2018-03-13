@@ -1,36 +1,25 @@
 package moe.clienthax.pixelmonbridge.impl;
 
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableBaseStatsData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableEVData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableEggData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableNameData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.*;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.item.ImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.tileentity.ImmutableComputerTileEntityData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableEVData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableEggData;
-import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableNameData;
+import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.*;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.tileentity.MutableComputerTileEntityData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableBaseStatsData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableEVData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableEggData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.PixelmonImmutableNameData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.*;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.player.PixelmonImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.item.PixelmonImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.tileentity.PixelmonImmutableComputerTileEntityData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableBaseStatsData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableEVData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableEggData;
-import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.PixelmonMutableNameData;
+import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.pixelmon.*;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.entity.player.PixelmonMutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.item.PixelmonMutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.tileentity.PixelmonMutableComputerTileEntityData;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon.BaseStatsDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon.EVDataProcessor;
+import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon.IVDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.player.PartyPokemonProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.item.PixelmonSpriteItemDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.multi.tileentity.ComputerTileEntityDataProcessor;
@@ -38,6 +27,7 @@ import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.E
 import moe.clienthax.pixelmonbridge.impl.data.processor.single.entity.pixelmon.NameDataProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.basestats.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.evs.*;
+import moe.clienthax.pixelmonbridge.impl.data.processor.value.entity.pixelmon.ivs.*;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.item.SpritePathValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerColorValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerOwnerValueProcessor;
@@ -103,6 +93,17 @@ public class PixelmonBridge {
         DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SP_ATTACK_EVS, new SPAttackEVSValueProcessor());
         DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SP_DEFENSE_EVS, new SPDefenseEVSValueProcessor());
         DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SPEED_EVS, new SpeedEVSValueProcessor());
+
+        /**
+         * IV Data
+         */
+        DataUtil.registerDataProcessorAndImpl(MutableIVData.class, PixelmonMutableIVData.class, ImmutableIVData.class, PixelmonImmutableIVData.class, new IVDataProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_HP_IVS, new HPIVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_ATTACK_IVS, new AttackIVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_DEFENSE_IVS, new DefenseIVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SP_ATTACK_IVS, new SPAttackIVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SP_DEFENSE_IVS, new SPDefenseIVSValueProcessor());
+        DataUtil.registerValueProcessor(PixelmonDataKeys.POKEMON_SPEED_IVS, new SpeedIVSValueProcessor());
 
         /**
          * Misc pokemon data
