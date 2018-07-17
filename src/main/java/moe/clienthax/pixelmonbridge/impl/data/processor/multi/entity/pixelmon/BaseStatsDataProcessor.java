@@ -2,6 +2,7 @@ package moe.clienthax.pixelmonbridge.impl.data.processor.multi.entity.pixelmon;
 
 import com.google.common.collect.ImmutableMap;
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
+import com.pixelmonmod.pixelmon.entities.pixelmon.stats.StatsType;
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.ImmutableBaseStatsData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutableBaseStatsData;
@@ -31,7 +32,7 @@ public class BaseStatsDataProcessor extends AbstractEntityDataProcessor<EntityPi
 
     @Override
     protected boolean set(EntityPixelmon dataHolder, Map<Key<?>, Object> keyValues) {
-        dataHolder.baseStats.hp = (int) keyValues.get(PixelmonDataKeys.POKEMON_BASESTATS_HP);
+        dataHolder.baseStats.stats.put(StatsType.HP, (int) keyValues.get(PixelmonDataKeys.POKEMON_BASESTATS_HP));
         dataHolder.baseStats.attack = (int) keyValues.get(PixelmonDataKeys.POKEMON_BASESTATS_ATTACK);
         dataHolder.baseStats.defence = (int) keyValues.get(PixelmonDataKeys.POKEMON_BASESTATS_DEFENSE);
         dataHolder.baseStats.spAtt = (int) keyValues.get(PixelmonDataKeys.POKEMON_BASESTATS_SP_ATTACK);

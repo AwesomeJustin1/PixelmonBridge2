@@ -23,7 +23,7 @@ public abstract class AbstractImmutableStringData<I extends ImmutableDataManipul
     private final ImmutableValue<String> immutableValue;
 
     public AbstractImmutableStringData(Class<I> immutableClass, String value, Key<? extends BaseValue<String>> usedKey,
-                                        Class<? extends M> mutableClass, String defaultValue) {
+                                       Class<? extends M> mutableClass, String defaultValue) {
         super(immutableClass, value, usedKey);
         checkArgument(!Modifier.isAbstract(mutableClass.getModifiers()), "The immutable class cannot be abstract!");
         checkArgument(!Modifier.isInterface(mutableClass.getModifiers()), "The immutable class cannot be an interface!");

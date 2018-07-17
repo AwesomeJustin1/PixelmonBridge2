@@ -27,7 +27,7 @@ public class PCTestCommand implements CommandExecutor {
         Location<World> pcloc = player.getLocation().add(-1, 0, 0);
         System.out.println(pcloc);
 
-        if(pcloc.getTileEntity().isPresent()) {
+        if (pcloc.getTileEntity().isPresent()) {
             TileEntity tileEntity = pcloc.getTileEntity().get();
 
             System.out.println(tileEntity.getContainers());
@@ -38,7 +38,7 @@ public class PCTestCommand implements CommandExecutor {
 
             tileEntity.offer(PixelmonDataKeys.COMPUTER_RAVE_MODE, true);
 
-            System.out.println(uuid.isPresent()+" "+dyeColor.getId()+" "+ravemode);
+            System.out.println(uuid.isPresent() + " " + dyeColor.getId() + " " + ravemode);
 
         } else {
             System.out.println("Wheres mah tile entity!?");

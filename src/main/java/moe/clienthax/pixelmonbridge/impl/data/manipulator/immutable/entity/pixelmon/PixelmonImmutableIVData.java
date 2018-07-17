@@ -16,20 +16,19 @@ import org.spongepowered.api.data.value.immutable.ImmutableValue;
 
 public class PixelmonImmutableIVData extends AbstractImmutableData<ImmutableIVData, MutableIVData> implements ImmutableIVData {
 
-    private final int hpIVS;
-    private final int attackIVS;
-    private final int defenseIVS;
-    private final int spAttackIVS;
-    private final int spDefenseIVS;
-    private final int speedIVS;
     public static final ValueFactory VALUEFACTORY = Sponge.getRegistry().getValueFactory();
-
     final ImmutableValue<Integer> hpIVSValue;
     final ImmutableValue<Integer> attackIVSValue;
     final ImmutableValue<Integer> defenseIVSValue;
     final ImmutableValue<Integer> spAttackIVSValue;
     final ImmutableValue<Integer> spDefenseIVSValue;
     final ImmutableValue<Integer> speedIVSValue;
+    private final int hpIVS;
+    private final int attackIVS;
+    private final int defenseIVS;
+    private final int spAttackIVS;
+    private final int spDefenseIVS;
+    private final int speedIVS;
 
     public PixelmonImmutableIVData(int hpIVS, int attackIVS, int defenseIVS, int spAttackIVS, int spDefenseIVS, int speedIVS) {
         this.hpIVS = hpIVS;

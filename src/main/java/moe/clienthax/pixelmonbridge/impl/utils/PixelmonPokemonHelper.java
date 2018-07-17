@@ -7,8 +7,8 @@ import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.storage.PixelmonStorage;
 import com.pixelmonmod.pixelmon.storage.PlayerStorage;
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
-import moe.clienthax.pixelmonbridge.api.utils.PokemonHelper;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon.MutablePokemonIDData;
+import moe.clienthax.pixelmonbridge.api.utils.PokemonHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import org.spongepowered.api.data.key.Keys;
@@ -47,8 +47,8 @@ public class PixelmonPokemonHelper implements PokemonHelper {
 
     @Override
     public Optional<Living> giveRandomMoveset(Living pixelmon) {
-        if(pixelmon.getClass().isAssignableFrom(EntityPixelmon.class)) {
-            ((EntityPixelmon)pixelmon).loadMoveset();
+        if (pixelmon.getClass().isAssignableFrom(EntityPixelmon.class)) {
+            ((EntityPixelmon) pixelmon).loadMoveset();
         }
         return Optional.empty();
     }
@@ -57,10 +57,10 @@ public class PixelmonPokemonHelper implements PokemonHelper {
     public Optional<Living> makeEgg(Living pixelmon1, Living pixelmon2) {
         EntityPixelmon parent1 = (EntityPixelmon) pixelmon1;
         EntityPixelmon parent2 = (EntityPixelmon) pixelmon2;
-        if(!parent1.isEgg && !parent2.isEgg && EntityPixelmon.canBreed(parent1, parent2)) {//TODO change to use type
+        if (!parent1.isEgg && !parent2.isEgg && EntityPixelmon.canBreed(parent1, parent2)) {//TODO change to use type
             EntityPixelmon egg = (EntityPixelmon) PixelmonEntityList.createEntityByName("Magikarp", (World) pixelmon1.getWorld());
             egg.makeEntityIntoEgg(parent1, parent2);
-            return Optional.of((Living)egg);
+            return Optional.of((Living) egg);
         }
 
         return Optional.empty();
@@ -73,7 +73,7 @@ public class PixelmonPokemonHelper implements PokemonHelper {
             playerStorage.recallAllPokemon();
             EntityPixelmon parent1 = (EntityPixelmon) PixelmonEntityList.createEntityFromNBT(playerStorage.partyPokemon[slot1], (World) player.getWorld());
             EntityPixelmon parent2 = (EntityPixelmon) PixelmonEntityList.createEntityFromNBT(playerStorage.partyPokemon[slot2], (World) player.getWorld());
-           return makeEgg((Living)parent1, (Living)parent2);
+            return makeEgg((Living) parent1, (Living) parent2);
         } catch (Exception e) {
             e.printStackTrace();
         }

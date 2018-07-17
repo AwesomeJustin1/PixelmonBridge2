@@ -2,7 +2,6 @@ package moe.clienthax.pixelmonbridge.api.data.key;
 
 import com.google.common.reflect.TypeToken;
 import org.spongepowered.api.data.key.Key;
-import org.spongepowered.api.data.key.KeyFactory;
 import org.spongepowered.api.data.type.DyeColor;
 import org.spongepowered.api.data.value.mutable.ListValue;
 import org.spongepowered.api.data.value.mutable.MapValue;
@@ -23,12 +22,21 @@ import static org.spongepowered.api.data.DataQuery.of;
 public class PixelmonDataKeys {
 
     //For whatever reason the one in spongeapi is bounded O_o
-    public static final TypeToken<Value<Float>> FLOAT_VALUE_TOKEN = new TypeToken<Value<Float>>() {private static final long serialVersionUID = -1;};
-    public static final TypeToken<OptionalValue<String>> OPTIONAL_STRING_VALUE_TOKEN = new TypeToken<OptionalValue<String>>() {private static final long serialVersionUID = -1;};
-    public static final TypeToken<ListValue<Integer>> LIST_INTEGER_VALUE_TOKEN = new TypeToken<ListValue<Integer>>() {private static final long serialVersionUID = -1;};
+    public static final TypeToken<Value<Float>> FLOAT_VALUE_TOKEN = new TypeToken<Value<Float>>() {
+        private static final long serialVersionUID = -1;
+    };
+    public static final TypeToken<OptionalValue<String>> OPTIONAL_STRING_VALUE_TOKEN = new TypeToken<OptionalValue<String>>() {
+        private static final long serialVersionUID = -1;
+    };
+    public static final TypeToken<ListValue<Integer>> LIST_INTEGER_VALUE_TOKEN = new TypeToken<ListValue<Integer>>() {
+        private static final long serialVersionUID = -1;
+    };
 
-    public static final TypeToken<MapValue<Integer, EntitySnapshot>> MAP_VALUE_INTEGER_ENTITYSNAPSHOT_VALUE_TOKEN = new TypeToken<MapValue<Integer, EntitySnapshot>>() {};
-    public static final TypeToken<MapValue<Integer, Map<Integer, EntitySnapshot>>> MAP_VALUE_INTEGER_MAP_INTEGER_ENTITYSNAPSHOT_VALUE_TOKEN = new TypeToken<MapValue<Integer, Map<Integer, EntitySnapshot>>>() {private static final long serialVersionUID = -1;};
+    public static final TypeToken<MapValue<Integer, EntitySnapshot>> MAP_VALUE_INTEGER_ENTITYSNAPSHOT_VALUE_TOKEN = new TypeToken<MapValue<Integer, EntitySnapshot>>() {
+    };
+    public static final TypeToken<MapValue<Integer, Map<Integer, EntitySnapshot>>> MAP_VALUE_INTEGER_MAP_INTEGER_ENTITYSNAPSHOT_VALUE_TOKEN = new TypeToken<MapValue<Integer, Map<Integer, EntitySnapshot>>>() {
+        private static final long serialVersionUID = -1;
+    };
 
     /**
      * Item specific keys
@@ -37,7 +45,7 @@ public class PixelmonDataKeys {
 
 
     /**
-     * Player specific keys
+     * moe.clienthax.pixelmonbridge.api.entity.Player specific keys
      */
     public static final Key<MapValue<Integer, EntitySnapshot>> PARTY_POKEMON = Key.builder().type(MAP_VALUE_INTEGER_ENTITYSNAPSHOT_VALUE_TOKEN).id("party_pokemon").name("Party Pokemon").query(of("partyPokemon")).build();
     public static final Key<MapValue<Integer, Map<Integer, EntitySnapshot>>> COMPUTER_POKEMON = Key.builder().type(MAP_VALUE_INTEGER_MAP_INTEGER_ENTITYSNAPSHOT_VALUE_TOKEN).id("computer_pokemon").name("Computer Pokemon").query(of("computerPokemon")).build();
@@ -87,7 +95,7 @@ public class PixelmonDataKeys {
     public static final Key<Value<String>> POKEMON_GROWTH = Key.builder().type(TypeTokens.STRING_VALUE_TOKEN).id("pokemon_growth").name("Pokemon Growth").query(of("pokemonGrowth")).build();
     public static final Key<Value<Integer>> POKEMON_VARIANT = Key.builder().type(TypeTokens.INTEGER_VALUE_TOKEN).id("pokemon_variant").name("Pokemon Variant").query(of("pokemonVariant")).build();
     public static final Key<Value<String>> POKEMON_GENDER = Key.builder().type(TypeTokens.STRING_VALUE_TOKEN).id("pokemon_gender").name("Pokemon Gender").query(of("pokemonGender")).build();
-    public static final Key<Value<Boolean>> POKEMON_PLAYER_OWNED = Key.builder().type(TypeTokens.BOOLEAN_VALUE_TOKEN).id("pokemon_player_owned").name("Pokemon Player Owned").query(of("pokemonPlayerOwned")).build();
+    public static final Key<Value<Boolean>> POKEMON_PLAYER_OWNED = Key.builder().type(TypeTokens.BOOLEAN_VALUE_TOKEN).id("pokemon_player_owned").name("Pokemon moe.clienthax.pixelmonbridge.api.entity.Player Owned").query(of("pokemonPlayerOwned")).build();
     public static final Key<Value<Boolean>> POKEMON_FAINTED = Key.builder().type(TypeTokens.BOOLEAN_VALUE_TOKEN).id("pokemon_fainted").name("Pokemon Fainted").query(of("pokemonFainted")).build();
     public static final Key<Value<String>> POKEMON_CAUGHT_BALL = Key.builder().type(TypeTokens.STRING_VALUE_TOKEN).id("pokemon_caught_ball").name("Pokemon Caught Ball").query(of("pokemonCaughtBall")).build();
     public static final Key<Value<String>> POKEMON_NATURE = Key.builder().type(TypeTokens.STRING_VALUE_TOKEN).id("pokemon_nature").name("Pokemon Nature").query(of("pokemonNature")).build();

@@ -1,7 +1,7 @@
 package moe.clienthax.tests.commands;
 
+import moe.clienthax.pixelmonbridge.api.catalog.pixelmon.PixelmonTypes;
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
-import moe.clienthax.pixelmonbridge.api.entity.PixelmonTypes;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -28,12 +28,11 @@ public class PartyTestCommand implements CommandExecutor {
         System.out.println(slot1);
 
 
-        if(slot1.getType().equals(PixelmonTypes.MUDKIP)) {
+        if (slot1.getType().equals(PixelmonTypes.MUDKIP)) {
             System.out.println("yep.. thats a mudkip alright");
         }
 
-        System.out.println(PixelmonTypes.MUDKIP +"<--type");
-
+        System.out.println(PixelmonTypes.MUDKIP + "<--type");
 
 
         return CommandResult.success();

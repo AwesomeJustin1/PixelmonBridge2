@@ -13,14 +13,12 @@ import org.spongepowered.api.plugin.Plugin;
 /**
  * Created by clienthax on 05/03/2018.
  */
-@Plugin(id = "testsss", name="Tests", version = "1.0.0", description = "Tests yo", dependencies = {@Dependency(id = "pixelmonbridge")})
+@Plugin(id = "testsss", name = "Tests", version = "1.0.0", description = "Tests yo", dependencies = {@Dependency(id = "pixelmonbridge")})
 public class Tests {
 
+    static Tests instance;
     @Inject
     private Logger logger;
-
-
-    static Tests instance;
 
     public static Logger getLogger() {
         return instance.logger;

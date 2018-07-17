@@ -11,6 +11,7 @@ import org.spongepowered.api.entity.living.player.Player;
 public interface MutablePokemonIDData extends ListData<Integer, MutablePokemonIDData, ImmutablePokemonIDData> {
 
     ListValue<Integer> pokemonID();
+
     void setAsPlayerPokemon(Player player);
 
 }

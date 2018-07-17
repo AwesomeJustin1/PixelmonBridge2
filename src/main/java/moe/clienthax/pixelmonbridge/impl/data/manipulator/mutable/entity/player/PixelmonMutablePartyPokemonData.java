@@ -5,10 +5,8 @@ import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.player.PixelmonImmutablePartyPokemonData;
-import org.spongepowered.api.data.value.mutable.MapValue;
 import org.spongepowered.api.entity.EntitySnapshot;
 import org.spongepowered.common.data.manipulator.mutable.common.AbstractMappedData;
-import org.spongepowered.common.data.value.mutable.SpongeMapValue;
 
 import java.util.Map;
 

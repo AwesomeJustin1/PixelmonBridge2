@@ -21,13 +21,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class PixelmonMutableEVData extends AbstractData<MutableEVData, ImmutableEVData> implements MutableEVData {
 
+    public static final ValueFactory VALUEFACTORY = Sponge.getRegistry().getValueFactory();
     private int hpEVS;
     private int attackEVS;
     private int defenseEVS;
     private int spAttackEVS;
     private int spDefenseEVS;
     private int speedEVS;
-    public static final ValueFactory VALUEFACTORY = Sponge.getRegistry().getValueFactory();
 
     public PixelmonMutableEVData() {
         this(0, 0, 0, 0, 0, 0);

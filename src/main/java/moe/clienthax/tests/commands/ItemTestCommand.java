@@ -18,7 +18,7 @@ public class ItemTestCommand implements CommandExecutor {
 
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
-        if(!(src instanceof Player))
+        if (!(src instanceof Player))
             return CommandResult.success();
 
         Player player = (Player) src;
@@ -28,10 +28,8 @@ public class ItemTestCommand implements CommandExecutor {
 
         Collection<ItemType> pixelmonItems = Sponge.getRegistry().getAllFor("pixelmon", ItemType.class);
         for (ItemType pixelmonItem : pixelmonItems) {
-            System.out.println("public static final ItemType "+pixelmonItem.getName().toUpperCase()+" = Sponge.getRegistry().getType(ItemType.class, \""+pixelmonItem.getId()+"\").get();");
+            System.out.println("public static final ItemType " + pixelmonItem.getName().toUpperCase() + " = Sponge.getRegistry().getType(ItemType.class, \"" + pixelmonItem.getId() + "\").get();");
         }
-
-
 
 
         return CommandResult.success();

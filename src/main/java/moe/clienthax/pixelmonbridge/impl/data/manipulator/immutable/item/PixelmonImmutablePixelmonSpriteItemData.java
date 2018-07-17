@@ -12,8 +12,7 @@ import static moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys.SPRITE_
 /**
  * Created by clienthax on 09/03/2018.
  */
-public class PixelmonImmutablePixelmonSpriteItemData extends AbstractImmutableData<ImmutablePixelmonSpriteItemData, MutablePixelmonSpriteItemData> implements ImmutablePixelmonSpriteItemData
-{
+public class PixelmonImmutablePixelmonSpriteItemData extends AbstractImmutableData<ImmutablePixelmonSpriteItemData, MutablePixelmonSpriteItemData> implements ImmutablePixelmonSpriteItemData {
 
     final String spriteName;
 

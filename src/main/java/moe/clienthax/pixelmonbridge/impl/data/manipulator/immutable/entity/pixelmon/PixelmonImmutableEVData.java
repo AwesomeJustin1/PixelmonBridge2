@@ -16,20 +16,19 @@ import org.spongepowered.api.data.value.immutable.ImmutableValue;
 
 public class PixelmonImmutableEVData extends AbstractImmutableData<ImmutableEVData, MutableEVData> implements ImmutableEVData {
 
-    private final int hpEVS;
-    private final int attackEVS;
-    private final int defenseEVS;
-    private final int spAttackEVS;
-    private final int spDefenseEVS;
-    private final int speedEVS;
     public static final ValueFactory VALUEFACTORY = Sponge.getRegistry().getValueFactory();
-
     final ImmutableValue<Integer> hpEVSValue;
     final ImmutableValue<Integer> attackEVSValue;
     final ImmutableValue<Integer> defenseEVSValue;
     final ImmutableValue<Integer> spAttackEVSValue;
     final ImmutableValue<Integer> spDefenseEVSValue;
     final ImmutableValue<Integer> speedEVSValue;
+    private final int hpEVS;
+    private final int attackEVS;
+    private final int defenseEVS;
+    private final int spAttackEVS;
+    private final int spDefenseEVS;
+    private final int speedEVS;
 
     public PixelmonImmutableEVData(int hpEVS, int attackEVS, int defenseEVS, int spAttackEVS, int spDefenseEVS, int speedEVS) {
         this.hpEVS = hpEVS;

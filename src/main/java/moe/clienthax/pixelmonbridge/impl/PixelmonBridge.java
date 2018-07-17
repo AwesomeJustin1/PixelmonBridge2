@@ -1,6 +1,10 @@
 package moe.clienthax.pixelmonbridge.impl;
 
+import com.pixelmonmod.pixelmon.Pixelmon;
+import com.pixelmonmod.pixelmon.config.*;
+import jdk.nashorn.internal.ir.Block;
 import moe.clienthax.pixelmonbridge.api.PixelmonBridgeAPI;
+import moe.clienthax.pixelmonbridge.api.block.PixelmonBlockTypes;
 import moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.pixelmon.*;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.entity.player.ImmutablePartyPokemonData;
@@ -10,6 +14,7 @@ import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.pixelmon
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.entity.player.MutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.tileentity.MutableComputerTileEntityData;
+import moe.clienthax.pixelmonbridge.api.item.PixelmonItemTypes;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.pixelmon.*;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.entity.player.PixelmonImmutablePartyPokemonData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.item.PixelmonImmutablePixelmonSpriteItemData;
@@ -35,9 +40,15 @@ import moe.clienthax.pixelmonbridge.impl.data.processor.value.item.SpritePathVal
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerColorValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerOwnerValueProcessor;
 import moe.clienthax.pixelmonbridge.impl.data.processor.value.tileentity.ComputerRaveValueProcessor;
-import moe.clienthax.pixelmonbridge.impl.utils.*;
+import moe.clienthax.pixelmonbridge.impl.utils.PixelmonBlockHelper;
+import moe.clienthax.pixelmonbridge.impl.utils.PixelmonComputerHelper;
+import moe.clienthax.pixelmonbridge.impl.utils.PixelmonPlayerHelper;
+import moe.clienthax.pixelmonbridge.impl.utils.PixelmonPokemonHelper;
+import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.Order;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.common.data.util.DataUtil;
@@ -45,22 +56,87 @@ import org.spongepowered.common.data.util.DataUtil;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import static moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys.SPRITE_NAME;
-
 /**
  * Created by clienthax on 09/03/2018.
  */
-@Plugin(name = "PixelmonBridge", version = "0.1", id = "pixelmonbridge", description = "bridge for pixelmon api", authors = "Clienthax", dependencies = @Dependency(id = "pixelmon"))
+@Plugin(name = "PixelmonBridge", version = "0.1", id = "pixelmonbridge", description = "bridge for pixelmon api", authors = {"Clienthax","Justin"}, dependencies = @Dependency(id = "pixelmon"))
 public class PixelmonBridge {
 
-    @Listener
-    public void onPreInit(GamePreInitializationEvent event) {
+    public static void setStaticFinalField(Field field, Object value) throws ReflectiveOperationException {
+        field.setAccessible(true);
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        field.set(null, value);
+    }
 
+    @Listener(order = Order.LATE)
+    public void onPreInit(GamePreInitializationEvent event) {
         registerHelpers();
         registerData();
-
-
+        for (Class aClass : new Class[]{PixelmonBlocks.class, PixelmonBlocksApricornTrees.class, PixelmonBlocksBerryTrees.class}) {
+            for (Field field : aClass.getDeclaredFields()) {
+                try {
+                    if (field.get(null) instanceof BlockType) {
+                        BlockType block = (BlockType) field.get(null);
+                        try {
+                            setStaticFinalField(PixelmonBlockTypes.class.getDeclaredField(block.getName().split(":")[1]), block);
+                        } catch (Exception e) {
+                            Pixelmon.LOGGER.error("Can't find entry for " + block.getName() + " in PixelmonBlockTypes");
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        for (Class aClass : new Class[]{PixelmonItems.class,
+                PixelmonItemsPokeballs.class,
+                PixelmonItemsApricorns.class,
+                PixelmonItemsBadgecases.class,
+                PixelmonItemsBadges.class,
+                PixelmonItemsFossils.class,
+                PixelmonItemsHeld.class,
+                PixelmonItemsMail.class,
+                PixelmonItemsTools.class
+        }) {
+            for (Field field : aClass.getDeclaredFields()) {
+                try {
+                    if (field.get(null) instanceof ItemType) {
+                        ItemType item = (ItemType) field.get(null);
+                        try {
+                            setStaticFinalField(PixelmonItemTypes.class.getDeclaredField(item.getName().split(":")[1]), item);
+                        } catch (Exception e) {
+                            Pixelmon.LOGGER.error("Can't find entry for " + item.getName() + " in PixelmonItemTypes");
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        PixelmonItemsTMs.HMs.forEach(i->{
+            ItemType item = (ItemType) i;
+            try {
+                setStaticFinalField(PixelmonItemTypes.class.getDeclaredField(item.getName().split(":")[1]), item);
+            } catch (Exception e) {
+                Pixelmon.LOGGER.error("Can't find entry for " + item.getName() + " in PixelmonItemTypes");
+                e.printStackTrace();
+            }
+        });
+        PixelmonItemsTMs.TMs.forEach(i->{
+            ItemType item = (ItemType) i;
+            try {
+                setStaticFinalField(PixelmonItemTypes.class.getDeclaredField(item.getName().split(":")[1]), item);
+            } catch (Exception e) {
+                Pixelmon.LOGGER.error("Can't find entry for " + item.getName() + " in PixelmonItemTypes");
+                e.printStackTrace();
+            }
+        });
     }
+
     private void registerHelpers() {
         try {
             setStaticFinalField(PixelmonBridgeAPI.class.getDeclaredField("pokemonHelper"), new PixelmonPokemonHelper());
@@ -70,14 +146,6 @@ public class PixelmonBridge {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void setStaticFinalField(Field field, Object value) throws ReflectiveOperationException {
-        field.setAccessible(true);
-        Field modifiersField = Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-        field.set(null, value);
     }
 
     private void registerData() {
@@ -140,13 +208,11 @@ public class PixelmonBridge {
         DataUtil.registerDualProcessor(MutablePokemonIDData.class, PixelmonMutablePokemonIDData.class, ImmutablePokemonIDData.class, PixelmonImmutablePokemonIDData.class, new PokemonIDDataProcessor());
 
         /**
-         * Player Data
+         * moe.clienthax.pixelmonbridge.api.entity.Player Data
          */
         DataUtil.registerDualProcessor(MutablePartyPokemonData.class, PixelmonMutablePartyPokemonData.class, ImmutablePartyPokemonData.class, PixelmonImmutablePartyPokemonData.class, new PartyPokemonProcessor());
         //DataUtil.registerDualProcessor(MutableComputerPokemonData.class, PixelmonMutableComputerPokemonData.class, ImmutableComputerPokemonData.class, PixelmonImmutableComputerPokemonData.class, new ComputerPokemonProcessor());
 
 
     }
-
-
 }

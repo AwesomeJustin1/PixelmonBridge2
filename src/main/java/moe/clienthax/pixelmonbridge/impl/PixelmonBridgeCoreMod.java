@@ -23,7 +23,8 @@ public class PixelmonBridgeCoreMod implements IFMLLoadingPlugin {
 
         //TODO nasty hack to get pixelmon up at the same time as the mixins
         try {
-            loadModJar(new File("G:\\Commisions\\Testservers\\1.12.2-pixelmon\\mods\\Pixelmon-1.12.2-6.2.1-universal.jar"));
+            //If the server owner changed the Pixelmon jar name to something other than the default or Pixelmon.jar then its on them :P
+            loadModJar(new File("./mods").listFiles(f-> f.getName().startsWith("Pixelmon-1.12.2") || f.getName().equals("Pixelmon.jar"))[0]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,14 +39,14 @@ public class PixelmonBridgeCoreMod implements IFMLLoadingPlugin {
         Mixins.addConfiguration("mixins.pixelmonmod.sponge.json");
     }
 
-    private void loadModJar(File jar) throws Exception{
+    private void loadModJar(File jar) throws Exception {
         ((LaunchClassLoader) this.getClass().getClassLoader()).addURL(jar.toURI().toURL());
         CoreModManager.getReparseableCoremods().add(jar.getName());
     }
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[] {};
+        return new String[]{};
     }
 
     @Override

@@ -62,7 +62,7 @@ public class ComputerTileEntityDataProcessor extends AbstractTileEntityDataProce
 
         Optional<UUID> ownerUUID = Optional.empty();
         Optional<String> ownerMaybe = container.getString(DataQuery.of("UnsafeData", NbtKeys.PC_OWNER));
-        if(ownerMaybe.isPresent()) {
+        if (ownerMaybe.isPresent()) {
             ownerUUID = Optional.of(UUID.fromString(ownerMaybe.get()));
         }
         String colorName = container.getString(DataQuery.of("UnsafeData", NbtKeys.PC_COLOUR)).get();

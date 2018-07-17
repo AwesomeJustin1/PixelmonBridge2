@@ -14,7 +14,9 @@ import java.util.UUID;
 public interface ImmutableComputerTileEntityData extends ImmutableDataManipulator<ImmutableComputerTileEntityData, MutableComputerTileEntityData> {
 
     ImmutableOptionalValue<UUID> owner();
+
     ImmutableValue<DyeColor> color();
+
     ImmutableValue<Boolean> raveMode();
 
 }

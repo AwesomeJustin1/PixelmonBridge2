@@ -21,13 +21,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class PixelmonMutableIVData extends AbstractData<MutableIVData, ImmutableIVData> implements MutableIVData {
 
+    public static final ValueFactory VALUEFACTORY = Sponge.getRegistry().getValueFactory();
     private int hpIVS;
     private int attackIVS;
     private int defenseIVS;
     private int spAttackIVS;
     private int spDefenseIVS;
     private int speedIVS;
-    public static final ValueFactory VALUEFACTORY = Sponge.getRegistry().getValueFactory();
 
     public PixelmonMutableIVData() {
         this(0, 0, 0, 0, 0, 0);

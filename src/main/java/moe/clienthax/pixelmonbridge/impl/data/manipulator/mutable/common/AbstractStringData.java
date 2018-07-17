@@ -1,8 +1,5 @@
 package moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.common;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.spongepowered.api.data.DataContainer;
 import org.spongepowered.api.data.key.Key;
 import org.spongepowered.api.data.manipulator.DataManipulator;
@@ -15,6 +12,9 @@ import org.spongepowered.common.data.value.mutable.SpongeValue;
 import org.spongepowered.common.util.ReflectionUtil;
 
 import java.lang.reflect.Modifier;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class AbstractStringData<M extends DataManipulator<M, I>, I extends ImmutableDataManipulator<I, M>> extends
         AbstractSingleData<String, M, I> {

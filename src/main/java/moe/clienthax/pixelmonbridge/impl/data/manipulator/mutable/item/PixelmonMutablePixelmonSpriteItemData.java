@@ -1,7 +1,5 @@
 package moe.clienthax.pixelmonbridge.impl.data.manipulator.mutable.item;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import moe.clienthax.pixelmonbridge.api.data.manipulator.immutable.item.ImmutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.api.data.manipulator.mutable.item.MutablePixelmonSpriteItemData;
 import moe.clienthax.pixelmonbridge.impl.data.manipulator.immutable.item.PixelmonImmutablePixelmonSpriteItemData;
@@ -14,13 +12,13 @@ import org.spongepowered.api.data.value.mutable.Value;
 
 import java.util.Optional;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static moe.clienthax.pixelmonbridge.api.data.key.PixelmonDataKeys.SPRITE_NAME;
 
 /**
  * Created by clienthax on 09/03/2018.
  */
-public class PixelmonMutablePixelmonSpriteItemData extends AbstractData<MutablePixelmonSpriteItemData, ImmutablePixelmonSpriteItemData> implements MutablePixelmonSpriteItemData
-{
+public class PixelmonMutablePixelmonSpriteItemData extends AbstractData<MutablePixelmonSpriteItemData, ImmutablePixelmonSpriteItemData> implements MutablePixelmonSpriteItemData {
 
     String spriteName;
 
@@ -45,7 +43,6 @@ public class PixelmonMutablePixelmonSpriteItemData extends AbstractData<MutableP
         return Sponge.getRegistry().getValueFactory()
                 .createValue(SPRITE_NAME, this.spriteName, "");
     }
-
 
 
     @Override

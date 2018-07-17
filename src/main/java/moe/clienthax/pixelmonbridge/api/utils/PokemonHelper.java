@@ -9,7 +9,8 @@ public interface PokemonHelper {
 
     /**
      * Sets up a pokemon to be owned by a player
-     * @param player the player to generate the pokemon ids from
+     *
+     * @param player      the player to generate the pokemon ids from
      * @param pokemonName the name of the pokemon to create
      * @return pokemon with ids + movesets setup
      */
@@ -17,6 +18,7 @@ public interface PokemonHelper {
 
     /**
      * Adds a random moveset to the pokemon
+     *
      * @param pixelmon to apply moves to
      * @return pixelmon with random moves applied
      */
@@ -24,6 +26,7 @@ public interface PokemonHelper {
 
     /**
      * Returns a egg made from the two pokemon supplied if they can both breed
+     *
      * @param pixelmon1
      * @param pixelmon2
      * @return
@@ -32,6 +35,7 @@ public interface PokemonHelper {
 
     /**
      * Returns a egg made from the two party slots of the player specified
+     *
      * @param player
      * @param slot1
      * @param slot2

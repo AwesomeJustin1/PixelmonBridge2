@@ -9,6 +9,7 @@ public interface BlockHelper {
 
     /**
      * Gets the base block which contains the tile entity for pixelmon multiblocks
+     *
      * @param worldLocation
      * @return either the base tile entity of the multiblock, or the original worldLocation
      */

@@ -10,10 +10,15 @@ import org.spongepowered.api.data.value.immutable.ImmutableValue;
 public interface ImmutableEVData extends ImmutableDataManipulator<ImmutableEVData, MutableEVData> {
 
     ImmutableValue<Integer> hpEVS();
+
     ImmutableValue<Integer> attackEVS();
+
     ImmutableValue<Integer> defenseEVS();
+
     ImmutableValue<Integer> spAttackEVS();
+
     ImmutableValue<Integer> spDefenseEVS();
+
     ImmutableValue<Integer> speedEVS();
 
 }

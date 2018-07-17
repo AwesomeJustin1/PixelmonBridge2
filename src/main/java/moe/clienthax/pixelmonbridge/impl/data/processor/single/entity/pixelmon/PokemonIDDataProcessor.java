@@ -29,7 +29,7 @@ public class PokemonIDDataProcessor extends AbstractEntitySingleDataProcessor<En
 
     @Override
     protected boolean set(EntityPixelmon dataHolder, List<Integer> value) {
-        if(value.size() != 2)//Range check
+        if (value.size() != 2)//Range check
             return false;
         dataHolder.setPokemonId(Ints.toArray(value));
         return true;
